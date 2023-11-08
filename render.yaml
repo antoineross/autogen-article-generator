@@ -1,0 +1,7 @@
+services:
+  - name: soap-opera
+    type: web
+    buildCommand: docker build -t soap-opera .
+    startCommand: docker run -p 7860:7860 soap-opera
+    env: production
+    healthCheckPath: /
