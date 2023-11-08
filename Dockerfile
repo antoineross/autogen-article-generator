@@ -1,3 +1,5 @@
+# syntax = docker/dockerfile:1.2
+
 FROM python:3.11
 
 # Create a non-root user
@@ -17,11 +19,10 @@ COPY requirements.txt $HOME/app/
 # Install Python dependencies from requirements.txt
 RUN pip install -r $HOME/app/requirements.txt
 
+RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env cat /etc/secrets/.env
+
 # Copy the application files, including app.py
 COPY . $HOME/app/
-# Copy the .env file into the Docker image
-COPY .env /home/user/app/.env
-RUN chmod +r /home/user/app/.env
 
 # Specify the command to run your application
 CMD ["chainlit", "run", "app.py", "--port", "7860"]
