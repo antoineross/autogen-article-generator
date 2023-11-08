@@ -19,6 +19,9 @@ RUN pip install -r $HOME/app/requirements.txt
 
 # Copy the application files, including app.py
 COPY . $HOME/app/
+# Copy the .env file into the Docker image
+COPY .env /home/user/app/.env
+RUN chmod +r /home/user/app/.env
 
 # Specify the command to run your application
 CMD ["chainlit", "run", "app.py", "--port", "7860"]
