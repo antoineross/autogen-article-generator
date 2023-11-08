@@ -19,7 +19,7 @@ COPY requirements.txt $HOME/app/
 # Install Python dependencies from requirements.txt
 RUN pip install -r $HOME/app/requirements.txt
 
-RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env cat /etc/secrets/.env
+RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env cat /etc/secrets/.env --ignore-engines
 
 # Copy the application files, including app.py
 COPY . $HOME/app/
