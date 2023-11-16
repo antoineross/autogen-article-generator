@@ -2,3 +2,4 @@ chainlit==0.7.501
 pyautogen==0.1.13
 python-dotenv==1.0.0
 requests==2.31.0
+langchain==0.0.322
