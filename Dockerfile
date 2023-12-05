@@ -1,8 +1,6 @@
-# syntax = docker/dockerfile:1.2
-
 FROM python:3.11
 
-# Create a non-root user
+# Create a non-root user with home directory
 RUN useradd -m -u 1000 user
 
 # Set user and environment variables
@@ -17,12 +15,15 @@ WORKDIR $HOME/app
 COPY requirements.txt $HOME/app/
 
 # Install Python dependencies from requirements.txt
-RUN pip install -r $HOME/app/requirements.txt
-
-RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env cat /etc/secrets/.env --ignore-engines
+RUN pip install --user -r $HOME/app/requirements.txt
 
 # Copy the application files, including app.py
-COPY . $HOME/app/
+COPY --chown=user:user . $HOME/app/
+
+# Ensure user has write permission to the app directory
+USER root
+RUN chown -R user:user $HOME/app
+USER user
 
 # Specify the command to run your application
 CMD ["chainlit", "run", "app.py", "--port", "7860"]
