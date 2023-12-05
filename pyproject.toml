@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "autogen-article-generator"
+version = "0.1.0"
+description = "Automates article generation using a multi-agent architecture with Autogen as nAI, and Chainlit as the UI."
+authors = ["Antoine Ross <developer.antoine@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+chainlit = "0.7.501"
+pyautogen = "0.1.13"
+python-dotenv = "1.0.0"
+requests = "2.31.0"
+langchain = "0.0.322"
+
+[tool.pyright]
+# https://github.com/microsoft/pyright/blob/main/docs/configuration.md
+useLibraryCodeForTypes = true
+exclude = [".cache"]
+
+[tool.ruff]
+# https://beta.ruff.rs/docs/configuration/
+select = ['E', 'W', 'F', 'I', 'B', 'C4', 'ARG', 'SIM']
+ignore = ['W291', 'W292', 'W293']
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

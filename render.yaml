@@ -1,8 +1,8 @@
 services:
-  - name: soap-opera
+  - name: autogen-article-generator
     type: web
-    buildCommand: docker build -t soap-opera .
-    startCommand: docker run -p 7860:7860 soap-opera
+    buildCommand: docker build -t autogen-article-generator .
+    startCommand: docker run -p 7860:7860 autogen-article-generator
     env: 
       - key: RUNTIME
         value: docker
